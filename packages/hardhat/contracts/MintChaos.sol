@@ -3,6 +3,11 @@ pragma solidity >=0.8.0 <0.9.0;
 
 // TODO
 // cannot claim prize bc NFTs nontransferable, MUSTFIX lol
+// // I believe this is fixed, check!
+// update prize to 90%, 10% leftover for next round
+// change random numbers to a state variable
+// // let "randomize" be callable by anyone to randomize the numbers
+// // let mint call randomize number. 
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -152,8 +157,8 @@ contract MintChaos is ERC721Enumerable, Ownable {
     function claimPrize() public {
         require(checkWinner(msg.sender), "Not a winner");
         
-        uint256 prize = prizePool / 2;
-        prizePool -= prize;
+        uint256 prize = prizePool * 90 / 100;  // 90% of the prize pool
+        prizePool -= prize;  // Reduce prize pool by 90%
 
         // Burn all NFTs owned by the winner
         uint256 balance = balanceOf(msg.sender);
