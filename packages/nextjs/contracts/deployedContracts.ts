@@ -7,7 +7,7 @@ import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 const deployedContracts = {
   31337: {
     MintChaos: {
-      address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+      address: "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9",
       abi: [
         {
           inputs: [],
@@ -123,19 +123,6 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "MAX_NUMBER",
-          outputs: [
-            {
-              internalType: "uint8",
-              name: "",
-              type: "uint8",
-            },
-          ],
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          inputs: [],
           name: "MIN_PRICE",
           outputs: [
             {
@@ -149,7 +136,7 @@ const deployedContracts = {
         },
         {
           inputs: [],
-          name: "TEST",
+          name: "POSSIBLE_SETS",
           outputs: [
             {
               internalType: "uint8",
@@ -282,6 +269,25 @@ const deployedContracts = {
               internalType: "address",
               name: "",
               type: "address",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "uint256",
+              name: "tokenID",
+              type: "uint256",
+            },
+          ],
+          name: "getRandomNumbers",
+          outputs: [
+            {
+              internalType: "uint256[5]",
+              name: "",
+              type: "uint256[5]",
             },
           ],
           stateMutability: "view",
