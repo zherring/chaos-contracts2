@@ -1,9 +1,6 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-// TODO
-// cannot claim prize bc NFTs nontransferable, MUSTFIX lol
-
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
@@ -83,16 +80,15 @@ contract MintChaos is ERC721Enumerable, Ownable  {
     function updatePotentialWins(address user, uint256[ARRAY_LENGTH] memory newTokenNumbers) internal {
         if (isWinner[user]) return; // Already a winner, no need to check
 
-        for (uint8 i = 0; i < ARRAY_LENGTH; i++) {
-            uint8 number = uint8(newTokenNumbers[i]);
-            bool hasAllPositions = true;
-            for (uint8 j = 0; j < ARRAY_LENGTH; j++) {
-                if (userNumberCounts[user][j][number] == 0) {
-                    hasAllPositions = false;
+        for (uint8 number = 1; number <= POSSIBLE_SETS; number++) {
+            bool hasCompleteSet = true;
+            for (uint8 position = 0; position < ARRAY_LENGTH; position++) {
+                if (userNumberCounts[user][position][number] == 0) {
+                    hasCompleteSet = false;
                     break;
                 }
             }
-            if (hasAllPositions) {
+            if (hasCompleteSet) {
                 isWinner[user] = true;
                 return;
             }
